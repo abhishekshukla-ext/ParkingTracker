@@ -1,0 +1,53 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="ParkingTracker.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:c4fToolkit="clr-namespace:Coding4Fun.Phone.Controls.Toolkit;assembly=Coding4Fun.Phone.Controls.Toolkit"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <StackPanel x:Name="LayoutRoot">
+        <StackPanel.Background>
+            <ImageBrush ImageSource="/Assets/Background.png" />
+        </StackPanel.Background>
+        <TextBlock Text="Welcome to parking tracker. Select the end time by tapping the + button at the bottom." 
+                   Name="EmptyTextBlock" Visibility="Collapsed"
+                   Foreground="Black"  FontWeight="ExtraBold"
+                    TextWrapping="Wrap" />
+        <StackPanel x:Name="timespanPanel" Visibility="Collapsed">
+                    <TextBlock Text="Your parking time will expire in " FontSize="30"
+                               Margin="0,20,0,0"
+                               HorizontalAlignment="Center" Foreground="Black"  FontWeight="ExtraBold"/>
+            
+                    <c4fToolkit:TimeSpanPicker Template="{StaticResource TimeSpanCustomStyle}"  x:Name="timeSpan"
+                                           VerticalAlignment="Center" Margin="0,20,0,0"
+                                           Foreground="Black"  FontWeight="ExtraBold"
+                                           Value="0" HorizontalAlignment="Center" Grid.Row="1" Width="470"/>
+
+            <TextBlock Text="Your parking meter will expire at" TextWrapping="NoWrap" 
+                       Margin="0,20,0,0" HorizontalAlignment="Center"
+                       Foreground="Black"  FontWeight="ExtraBold"/>
+            <TextBlock x:Name="ExpirationTime" HorizontalAlignment="Center"
+                       FontSize="24"  Margin="0,20,0,0" Foreground="Black"  FontWeight="ExtraBold"/>
+
+            <TextBlock Text="You will reminided at" TextWrapping="Wrap" Margin="0,20,0,0"
+                       HorizontalAlignment="Center" Foreground="Black"  FontWeight="ExtraBold"/>
+            <TextBlock x:Name="BeginTime" HorizontalAlignment="Center" 
+                       FontSize="24" Margin="0,20,0,0" Foreground="Black"  FontWeight="ExtraBold"/>
+        </StackPanel>
+    </StackPanel>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Add.png" Text="Add" Click="ApplicationBarAddButtonClick"/>
+            <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Delete.png" Text="Delete" Click="ApplicationBarDeleteButtonClick"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>
