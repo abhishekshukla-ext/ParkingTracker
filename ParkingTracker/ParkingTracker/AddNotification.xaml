@@ -24,7 +24,7 @@
                            Text="Select parking expiry time" VerticalAlignment="Center"
                            HorizontalAlignment="Center" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Matura MT Script Capitals" TextWrapping="Wrap" FontStyle="Italic" FontWeight="Bold"/>
 
-            <toolkit:DatePicker x:Name="expirationDatePicker" Margin="0,20,0,0"
+            <toolkit:DatePicker x:Name="expirationDatePicker" Margin="0,20,0,0" ValueChanged="ExpirationDatePickerValueChanged"
                                 HorizontalAlignment="Center" Foreground="#FF07165B" FontWeight="ExtraBold" Template="{StaticResource DatePickerControlTemplate}" Width="279" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Quartz MS"/>
             
             <toolkit:TimePicker x:Name="expirationTimePicker" Margin="0,20,0,0"

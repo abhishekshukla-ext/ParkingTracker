@@ -23,7 +23,6 @@
                    Foreground="#FF07165B"  FontWeight="ExtraBold"
                     TextWrapping="Wrap" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Matura MT Script Capitals" FontSize="36" />
         
-
         <StackPanel x:Name="timespanPanel" Visibility="Collapsed">
             <TextBlock Text="Your parking time will expire in " FontSize="30"
                                Margin="0,20,0,0"
@@ -32,10 +31,10 @@
             <c4fToolkit:TimeSpanPicker Template="{StaticResource TimeSpanCustomStyle}"  x:Name="timeSpan"
                                            VerticalAlignment="Center" Margin="0,20,0,0"
                                            Foreground="#FF07165B"  FontWeight="ExtraBold"
-                                           Value="0" HorizontalAlignment="Center" Grid.Row="1" Width="470" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Quartz MS"/>
+                                           Value="0" HorizontalAlignment="Center" Grid.Row="1" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Quartz MS"/>
 
             <TextBlock Text="Your parking meter will expire at" TextWrapping="NoWrap" 
-                       Margin="0,20,0,0" HorizontalAlignment="Center"
+                       Margin="0,120,0,0" HorizontalAlignment="Center"
                        Foreground="#FF07165B"  FontWeight="ExtraBold" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Matura MT Script Capitals" FontSize="24"/>
             <TextBlock x:Name="ExpirationTime" HorizontalAlignment="Center"
                        FontSize="24"  Margin="0,20,0,0" Foreground="#FF07165B"  FontWeight="ExtraBold" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Quartz MS"/>

@@ -142,12 +142,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Background.png" />
-    <Content Include="Assets\Tiles\Iconic\IconicTileMediumLarge.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\Tiles\Iconic\IconicTileSmall.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Assets\Tiles\Iconic\IconicTileMediumLarge.png" />
+    <Content Include="Assets\Tiles\Iconic\IconicTileSmall.png" />
     <Content Include="Assets\Tiles\Iconic\110x110.png" />
     <Content Include="Assets\Tiles\Iconic\202x202.png" />
     <Content Include="Assets\Tiles\ParkingAppTile.png" />

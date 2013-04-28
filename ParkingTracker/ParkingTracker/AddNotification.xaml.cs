@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Navigation;
 using Microsoft.Phone.Scheduler;
 
 namespace ParkingTracker
@@ -25,7 +24,7 @@ namespace ParkingTracker
             if (expirationTimePicker.Value != null)
                 time = (DateTime) expirationTimePicker.Value;
 
-            //time = date.Date + time.TimeOfDay;
+            time = date.Date + time.TimeOfDay;
 
             DateTime expirationTime = time;
             //TODO : Replace the begin time with ExpirationTime-15
@@ -59,6 +58,15 @@ namespace ParkingTracker
             if(NavigationService.CanGoBack)
             {
                 NavigationService.GoBack();
+            }
+        }
+
+        private void ExpirationDatePickerValueChanged(object sender, Microsoft.Phone.Controls.DateTimeValueChangedEventArgs e)
+        {
+            if(expirationDatePicker.Value.Value.Date > DateTime.Now.Date.AddDays(1))
+            {
+                expirationDatePicker.Value = DateTime.Now.Date;
+                MessageBox.Show("The parking meter expiry date cannot be after tomorrow.");
             }
         }
     }

@@ -14,7 +14,6 @@ namespace ParkingTracker
         IEnumerable<ScheduledNotification> _notifications;
         private DispatcherTimer _dispatcherTimer;
         private DateTime EndTime { get; set; }
-        readonly ShellTileSchedule _sampleTileSchedule = new ShellTileSchedule();
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
@@ -47,11 +46,19 @@ namespace ParkingTracker
             if (_notifications.Count<ScheduledNotification>() > 0)
             {
                 var note = _notifications.First<ScheduledNotification>();
-                timeSpan.Value = ((Microsoft.Phone.Scheduler.ScheduledAction) (note)).ExpirationTime.TimeOfDay -
-                                      DateTime.Now.TimeOfDay;
-                BeginTime.Text = note.BeginTime.TimeOfDay.ToString();
-                ExpirationTime.Text = note.ExpirationTime.TimeOfDay.ToString();
+                timeSpan.Value = ((Microsoft.Phone.Scheduler.ScheduledAction) (note)).ExpirationTime -
+                                      DateTime.Now;
 
+                if (note.ExpirationTime.Date == DateTime.Now.Date)
+                {
+                    BeginTime.Text = "Today at " + note.BeginTime.TimeOfDay.ToString();
+                    ExpirationTime.Text = "Today at " + note.ExpirationTime.TimeOfDay.ToString();
+                }
+                else
+                {
+                    BeginTime.Text = String.Format("{0:f}", note.BeginTime);
+                    ExpirationTime.Text = String.Format("{0:f}", note.ExpirationTime);
+                }
                 if (_dispatcherTimer == null)
                 {
                     _dispatcherTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(100) };
@@ -83,7 +90,7 @@ namespace ParkingTracker
             if (remaining.TotalSeconds <= 0)
             {
                 _dispatcherTimer.Stop();
-                if (_notifications.Count<ScheduledNotification>() > 0)
+                if (_notifications != null && _notifications.Count<ScheduledNotification>() > 0)
                 {
                     ScheduledActionService.Remove(_notifications.First<ScheduledNotification>().Name);
                 }
@@ -100,8 +107,6 @@ namespace ParkingTracker
             {
                 if (_notifications.Count<ScheduledNotification>() > 0)
                 {
-                    SetIconicTile(false, null);
-
                     ScheduledActionService.Remove(_notifications.First<ScheduledNotification>().Name);
                     _notifications = null;
                     EndTime = DateTime.MinValue;
@@ -112,6 +117,7 @@ namespace ParkingTracker
                     {
                         _dispatcherTimer.Stop();
                     }
+                    SetIconicTile(false, null);
                 }
             }
         }
@@ -121,7 +127,7 @@ namespace ParkingTracker
             IconicTileData oIcontile = new IconicTileData();
             oIcontile.Title = "Parking Tracker";
 
-            oIcontile.IconImage = new Uri("Assets/Tiles/Iconic/IconicTileSmall.png", UriKind.Relative);
+            oIcontile.IconImage = new Uri("Assets/Tiles/Iconic/IconicTileMediumLarge.png", UriKind.Relative);
             oIcontile.SmallIconImage = new Uri("Assets/Tiles/Iconic/IconicTileSmall.png", UriKind.Relative);
 
             if (timeSet)
@@ -138,20 +144,23 @@ namespace ParkingTracker
                 if (TileToFind != null && TileToFind.NavigationUri.ToString().Contains("Iconic"))
                 {
                     TileToFind.Delete();
-                    ShellTile.Create(new Uri("/MainPage.xaml?id=Iconic", UriKind.Relative), oIcontile, true);
+                    try
+                    {
+                        ShellTile.Create(new Uri("/MainPage.xaml?id=Iconic", UriKind.Relative), oIcontile, true);
+                    }
+                    catch(Exception){}
                 }
                 else
                 {
-                    ShellTile.Create(new Uri("/MainPage.xaml?id=Iconic", UriKind.Relative), oIcontile, true);
+                    try
+                    {
+                        ShellTile.Create(new Uri("/MainPage.xaml?id=Iconic", UriKind.Relative), oIcontile, true);
+                    }
+                    catch(Exception){}
                 }
             }
             else
             {
-                oIcontile.WideContent1 = "Set Parking meter expiry time";
-                oIcontile.WideContent2 = String.Empty;
-
-                oIcontile.BackgroundColor = Color.FromArgb(255, 56, 149, 253);
-
                 ShellTile TileToFind =
                     ShellTile.ActiveTiles.FirstOrDefault(x => x.NavigationUri.ToString().Contains("Iconic".ToString()));
 
