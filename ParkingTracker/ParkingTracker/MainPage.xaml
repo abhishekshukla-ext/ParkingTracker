@@ -20,28 +20,30 @@
         </StackPanel.Background>
         <TextBlock Text="Welcome to parking tracker. Select the end time by tapping the + button at the bottom." 
                    Name="EmptyTextBlock" Visibility="Collapsed"
-                   Foreground="Black"  FontWeight="ExtraBold"
-                    TextWrapping="Wrap" />
+                   Foreground="#FF07165B"  FontWeight="ExtraBold"
+                    TextWrapping="Wrap" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Matura MT Script Capitals" FontSize="36" />
+        
+
         <StackPanel x:Name="timespanPanel" Visibility="Collapsed">
-                    <TextBlock Text="Your parking time will expire in " FontSize="30"
+            <TextBlock Text="Your parking time will expire in " FontSize="30"
                                Margin="0,20,0,0"
-                               HorizontalAlignment="Center" Foreground="Black"  FontWeight="ExtraBold"/>
-            
-                    <c4fToolkit:TimeSpanPicker Template="{StaticResource TimeSpanCustomStyle}"  x:Name="timeSpan"
+                               HorizontalAlignment="Center" Foreground="#FF07165B"  FontWeight="ExtraBold" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Matura MT Script Capitals" TextWrapping="Wrap"/>
+
+            <c4fToolkit:TimeSpanPicker Template="{StaticResource TimeSpanCustomStyle}"  x:Name="timeSpan"
                                            VerticalAlignment="Center" Margin="0,20,0,0"
-                                           Foreground="Black"  FontWeight="ExtraBold"
-                                           Value="0" HorizontalAlignment="Center" Grid.Row="1" Width="470"/>
+                                           Foreground="#FF07165B"  FontWeight="ExtraBold"
+                                           Value="0" HorizontalAlignment="Center" Grid.Row="1" Width="470" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Quartz MS"/>
 
             <TextBlock Text="Your parking meter will expire at" TextWrapping="NoWrap" 
                        Margin="0,20,0,0" HorizontalAlignment="Center"
-                       Foreground="Black"  FontWeight="ExtraBold"/>
+                       Foreground="#FF07165B"  FontWeight="ExtraBold" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Matura MT Script Capitals" FontSize="24"/>
             <TextBlock x:Name="ExpirationTime" HorizontalAlignment="Center"
-                       FontSize="24"  Margin="0,20,0,0" Foreground="Black"  FontWeight="ExtraBold"/>
+                       FontSize="24"  Margin="0,20,0,0" Foreground="#FF07165B"  FontWeight="ExtraBold" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Quartz MS"/>
 
             <TextBlock Text="You will reminided at" TextWrapping="Wrap" Margin="0,20,0,0"
-                       HorizontalAlignment="Center" Foreground="Black"  FontWeight="ExtraBold"/>
+                       HorizontalAlignment="Center" Foreground="#FF07165B"  FontWeight="ExtraBold" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Matura MT Script Capitals" FontSize="24"/>
             <TextBlock x:Name="BeginTime" HorizontalAlignment="Center" 
-                       FontSize="24" Margin="0,20,0,0" Foreground="Black"  FontWeight="ExtraBold"/>
+                       FontSize="24" Margin="0,20,0,0" Foreground="#FF07165B"  FontWeight="ExtraBold" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Quartz MS"/>
         </StackPanel>
     </StackPanel>
     <phone:PhoneApplicationPage.ApplicationBar>

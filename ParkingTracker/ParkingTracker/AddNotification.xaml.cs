@@ -17,9 +17,16 @@ namespace ParkingTracker
             String name = Guid.NewGuid().ToString();
 
             var time = DateTime.Now;
+            var date = DateTime.Now;
+
+            if (expirationDatePicker.Value != null)
+                date = (DateTime) expirationDatePicker.Value;
 
             if (expirationTimePicker.Value != null)
                 time = (DateTime) expirationTimePicker.Value;
+
+            //time = date.Date + time.TimeOfDay;
+
             DateTime expirationTime = time;
             //TODO : Replace the begin time with ExpirationTime-15
             DateTime beginTime = expirationTime.Subtract(new TimeSpan(0, 15, 0));
@@ -30,26 +37,29 @@ namespace ParkingTracker
                 MessageBox.Show("Parking meter already expired or about to expire within next 15 minutes.");
                 return;
             }
-
-            // Create a URI for the page that will be launched if the user
-            // taps on the reminder. Use query string parameters to pass 
-            // content to the page that is launched.
             
             var navigationUri = new Uri("/MainPage.xaml",UriKind.Relative);
-
-
-            Reminder reminder = new Reminder(name);
-            reminder.Title = "Parking meter expiring title";
-            reminder.Content = "Parking meter expiring content";
+            
+            var reminder = new Reminder(name);
+            reminder.Title = "Parking Meter";
+            reminder.Content = "Your parking meter time is expiring in 15 minutes";
             reminder.BeginTime = beginTime;
             reminder.ExpirationTime = expirationTime;
             reminder.RecurrenceType = RecurrenceInterval.None;
             reminder.NavigationUri = navigationUri;
-
+            
             // Register the reminder with the system.
             ScheduledActionService.Add(reminder);
 
             NavigationService.GoBack();
+        }
+
+        private void ApplicationBarBackButtonClick(object sender, EventArgs e)
+        {
+            if(NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
         }
     }
 }

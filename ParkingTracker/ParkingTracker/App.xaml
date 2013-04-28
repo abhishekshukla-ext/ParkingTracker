@@ -23,13 +23,30 @@
         			Content="{TemplateBinding ValueString}"
         			BorderThickness="0"
         			FontFamily="{TemplateBinding FontFamily}"
-        			Foreground="Black"
+        			Foreground="#FF07165B"
         			Height="150"
         			HorizontalContentAlignment="Center"/>
         	</StackPanel>
         </ControlTemplate>
     	<ControlTemplate x:Key="TimePickerControlTemplate" TargetType="toolkit:TimePicker">
     		<StackPanel Margin="0,0,-79,0">
+    			<ContentControl
+    				Content="{TemplateBinding Header}"
+    				ContentTemplate="{TemplateBinding HeaderTemplate}"
+    				Foreground="{StaticResource PhoneSubtleBrush}"
+    				HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+    				/>
+    			<Button
+    				x:Name="DateTimeButton"
+    				Content="{TemplateBinding ValueString}"
+    				Background="{TemplateBinding Background}"
+    				FontFamily="{TemplateBinding FontFamily}"
+    				Foreground="{TemplateBinding Foreground}"
+    				HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" FontSize="48" BorderThickness="0"/>
+    		</StackPanel>
+    	</ControlTemplate>
+    	<ControlTemplate x:Key="DatePickerControlTemplate" TargetType="toolkit:DatePicker">
+    			<StackPanel Margin="0,0,-79,0">
     			<ContentControl
     				Content="{TemplateBinding Header}"
     				ContentTemplate="{TemplateBinding HeaderTemplate}"

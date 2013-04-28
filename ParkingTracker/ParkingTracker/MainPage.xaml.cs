@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Threading;
 using Microsoft.Phone.Scheduler;
+using Microsoft.Phone.Shell;
 
 namespace ParkingTracker
 {
@@ -12,6 +14,7 @@ namespace ParkingTracker
         IEnumerable<ScheduledNotification> _notifications;
         private DispatcherTimer _dispatcherTimer;
         private DateTime EndTime { get; set; }
+        readonly ShellTileSchedule _sampleTileSchedule = new ShellTileSchedule();
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
@@ -46,8 +49,8 @@ namespace ParkingTracker
                 var note = _notifications.First<ScheduledNotification>();
                 timeSpan.Value = ((Microsoft.Phone.Scheduler.ScheduledAction) (note)).ExpirationTime.TimeOfDay -
                                       DateTime.Now.TimeOfDay;
-                BeginTime.Text = ((Microsoft.Phone.Scheduler.ScheduledAction) (note)).BeginTime.TimeOfDay.ToString();
-                ExpirationTime.Text = ((Microsoft.Phone.Scheduler.ScheduledAction)(note)).ExpirationTime.TimeOfDay.ToString();
+                BeginTime.Text = note.BeginTime.TimeOfDay.ToString();
+                ExpirationTime.Text = note.ExpirationTime.TimeOfDay.ToString();
 
                 if (_dispatcherTimer == null)
                 {
@@ -59,9 +62,9 @@ namespace ParkingTracker
                 {
                     if (timeSpan.Value != null) EndTime = DateTime.Now + (TimeSpan)timeSpan.Value;
                 }
-
+                SetIconicTile(true, note.ExpirationTime.ToString());
                 _dispatcherTimer.Start();
-
+                
                 EmptyTextBlock.Visibility = Visibility.Collapsed;
                 timespanPanel.Visibility = Visibility.Visible;
             }
@@ -80,7 +83,10 @@ namespace ParkingTracker
             if (remaining.TotalSeconds <= 0)
             {
                 _dispatcherTimer.Stop();
-                ScheduledActionService.Remove(_notifications.First<ScheduledNotification>().Name);
+                if (_notifications.Count<ScheduledNotification>() > 0)
+                {
+                    ScheduledActionService.Remove(_notifications.First<ScheduledNotification>().Name);
+                }
                 EndTime = DateTime.MinValue;
                 timeSpan.Value = new TimeSpan();
                 timespanPanel.Visibility = Visibility.Collapsed;
@@ -90,19 +96,71 @@ namespace ParkingTracker
 
         private void ApplicationBarDeleteButtonClick(object sender, EventArgs e)
         {
-            if (_notifications.Count<ScheduledNotification>() > 0)
+            if (MessageBox.Show("Are you sure?", "Delete Item", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                ScheduledActionService.Remove(_notifications.First<ScheduledNotification>().Name);
-                _notifications = null;
-                EndTime = DateTime.MinValue;
-                timeSpan.Value = new TimeSpan();
-                timespanPanel.Visibility = Visibility.Collapsed;
-                EmptyTextBlock.Visibility = Visibility.Visible;
-                if (_dispatcherTimer != null)
+                if (_notifications.Count<ScheduledNotification>() > 0)
                 {
-                    _dispatcherTimer.Stop();
+                    SetIconicTile(false, null);
+
+                    ScheduledActionService.Remove(_notifications.First<ScheduledNotification>().Name);
+                    _notifications = null;
+                    EndTime = DateTime.MinValue;
+                    timeSpan.Value = new TimeSpan();
+                    timespanPanel.Visibility = Visibility.Collapsed;
+                    EmptyTextBlock.Visibility = Visibility.Visible;
+                    if (_dispatcherTimer != null)
+                    {
+                        _dispatcherTimer.Stop();
+                    }
                 }
             }
+        }
+
+        private void SetIconicTile(bool timeSet, string expirationTime)
+        {
+            IconicTileData oIcontile = new IconicTileData();
+            oIcontile.Title = "Parking Tracker";
+
+            oIcontile.IconImage = new Uri("Assets/Tiles/Iconic/IconicTileSmall.png", UriKind.Relative);
+            oIcontile.SmallIconImage = new Uri("Assets/Tiles/Iconic/IconicTileSmall.png", UriKind.Relative);
+
+            if (timeSet)
+            {
+                oIcontile.WideContent1 = "Parking meter expire at ";
+                if (expirationTime != null) oIcontile.WideContent2 = expirationTime;
+
+                oIcontile.BackgroundColor = Color.FromArgb(255, 56, 149, 253);
+
+                // find the tile object for the application tile that using "Iconic" contains string in it.
+                ShellTile TileToFind =
+                    ShellTile.ActiveTiles.FirstOrDefault(x => x.NavigationUri.ToString().Contains("Iconic".ToString()));
+
+                if (TileToFind != null && TileToFind.NavigationUri.ToString().Contains("Iconic"))
+                {
+                    TileToFind.Delete();
+                    ShellTile.Create(new Uri("/MainPage.xaml?id=Iconic", UriKind.Relative), oIcontile, true);
+                }
+                else
+                {
+                    ShellTile.Create(new Uri("/MainPage.xaml?id=Iconic", UriKind.Relative), oIcontile, true);
+                }
+            }
+            else
+            {
+                oIcontile.WideContent1 = "Set Parking meter expiry time";
+                oIcontile.WideContent2 = String.Empty;
+
+                oIcontile.BackgroundColor = Color.FromArgb(255, 56, 149, 253);
+
+                ShellTile TileToFind =
+                    ShellTile.ActiveTiles.FirstOrDefault(x => x.NavigationUri.ToString().Contains("Iconic".ToString()));
+
+                if (TileToFind != null && TileToFind.NavigationUri.ToString().Contains("Iconic"))
+                {
+                    TileToFind.Delete();
+                }
+            }
+
         }
     }
 }

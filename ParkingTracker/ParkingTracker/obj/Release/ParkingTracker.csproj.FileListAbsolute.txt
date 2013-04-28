@@ -1,6 +1,6 @@
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\Bin\Release\Assets\ApplicationIcon.png
-D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\Bin\Release\Assets\Tiles\IconicTileMediumLarge.png
-D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\Bin\Release\Assets\Tiles\IconicTileSmall.png
+D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\Bin\Release\Assets\Tiles\Iconic\IconicTileMediumLarge.png
+D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\Bin\Release\Assets\Tiles\Iconic\IconicTileSmall.png
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\Bin\Release\ParkingTracker.dll
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\Bin\Release\ParkingTracker.pdb
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\Bin\Release\AppManifest.xaml

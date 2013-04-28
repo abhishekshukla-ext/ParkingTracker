@@ -19,17 +19,21 @@
             <ImageBrush ImageSource="/Assets/Background.png" />
         </Grid.Background>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-            <TextBlock Height="50" FontSize="32" Margin="0,20,0,0"
-                           Name="expirationTimeLabel" Foreground="Black" FontWeight="ExtraBold"
-                           Text="Enter the parking expiry time" VerticalAlignment="Top"
-                           HorizontalAlignment="Center"/>
+            <TextBlock FontSize="32" Margin="0,20,0,0"
+                           Name="expirationTimeLabel" Foreground="#FF07165B"
+                           Text="Select parking expiry time" VerticalAlignment="Center"
+                           HorizontalAlignment="Center" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Matura MT Script Capitals" TextWrapping="Wrap" FontStyle="Italic" FontWeight="Bold"/>
 
+            <toolkit:DatePicker x:Name="expirationDatePicker" Margin="0,20,0,0"
+                                HorizontalAlignment="Center" Foreground="#FF07165B" FontWeight="ExtraBold" Template="{StaticResource DatePickerControlTemplate}" Width="279" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Quartz MS"/>
+            
             <toolkit:TimePicker x:Name="expirationTimePicker" Margin="0,20,0,0"
-                                HorizontalAlignment="Center" Foreground="Black" FontWeight="ExtraBold" Template="{StaticResource TimePickerControlTemplate}" Width="236"/>
+                                HorizontalAlignment="Center" Foreground="#FF07165B" FontWeight="ExtraBold" Template="{StaticResource TimePickerControlTemplate}" Width="236" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Quartz MS"/>
         </StackPanel>
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Back.png" Text="Back" Click="ApplicationBarBackButtonClick"/>
             <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Save.png" Text="Save" Click="ApplicationBarSaveButtonClick"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
