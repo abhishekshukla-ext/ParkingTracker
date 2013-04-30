@@ -46,18 +46,18 @@ namespace ParkingTracker
             if (_notifications.Count<ScheduledNotification>() > 0)
             {
                 var note = _notifications.First<ScheduledNotification>();
-                timeSpan.Value = ((Microsoft.Phone.Scheduler.ScheduledAction) (note)).ExpirationTime -
+                timeSpan.Value = note.ExpirationTime -
                                       DateTime.Now;
 
                 if (note.ExpirationTime.Date == DateTime.Now.Date)
                 {
-                    BeginTime.Text = "Today at " + note.BeginTime.TimeOfDay.ToString();
-                    ExpirationTime.Text = "Today at " + note.ExpirationTime.TimeOfDay.ToString();
+                    BeginTime.Text = note.BeginTime.TimeOfDay.ToString() + " Today";
+                    ExpirationTime.Text = note.ExpirationTime.TimeOfDay.ToString() + " Today";
                 }
                 else
                 {
-                    BeginTime.Text = String.Format("{0:f}", note.BeginTime);
-                    ExpirationTime.Text = String.Format("{0:f}", note.ExpirationTime);
+                    BeginTime.Text = String.Format("{0:t}", note.BeginTime) + " " + String.Format("{0:m}", note.BeginTime);
+                    ExpirationTime.Text = String.Format("{0:t}", note.ExpirationTime) + " " + String.Format("{0:m}", note.ExpirationTime);
                 }
                 if (_dispatcherTimer == null)
                 {
@@ -69,7 +69,7 @@ namespace ParkingTracker
                 {
                     if (timeSpan.Value != null) EndTime = DateTime.Now + (TimeSpan)timeSpan.Value;
                 }
-                SetIconicTile(true, note.ExpirationTime.ToString());
+                SetIconicTile(true, ExpirationTime.Text);
                 _dispatcherTimer.Start();
                 
                 EmptyTextBlock.Visibility = Visibility.Collapsed;
@@ -132,18 +132,19 @@ namespace ParkingTracker
 
             if (timeSet)
             {
-                oIcontile.WideContent1 = "Parking meter expire at ";
-                if (expirationTime != null) oIcontile.WideContent2 = expirationTime;
+                if (expirationTime != null) oIcontile.WideContent1 = expirationTime;
+
+                if (expirationTime != null) oIcontile.WideContent2 = "Parking expiry time";
 
                 oIcontile.BackgroundColor = Color.FromArgb(255, 56, 149, 253);
 
                 // find the tile object for the application tile that using "Iconic" contains string in it.
-                ShellTile TileToFind =
+                ShellTile tileToFind =
                     ShellTile.ActiveTiles.FirstOrDefault(x => x.NavigationUri.ToString().Contains("Iconic".ToString()));
 
-                if (TileToFind != null && TileToFind.NavigationUri.ToString().Contains("Iconic"))
+                if (tileToFind != null && tileToFind.NavigationUri.ToString().Contains("Iconic"))
                 {
-                    TileToFind.Delete();
+                    tileToFind.Delete();
                     try
                     {
                         ShellTile.Create(new Uri("/MainPage.xaml?id=Iconic", UriKind.Relative), oIcontile, true);
@@ -161,12 +162,12 @@ namespace ParkingTracker
             }
             else
             {
-                ShellTile TileToFind =
+                ShellTile tileToFind =
                     ShellTile.ActiveTiles.FirstOrDefault(x => x.NavigationUri.ToString().Contains("Iconic".ToString()));
 
-                if (TileToFind != null && TileToFind.NavigationUri.ToString().Contains("Iconic"))
+                if (tileToFind != null && tileToFind.NavigationUri.ToString().Contains("Iconic"))
                 {
-                    TileToFind.Delete();
+                    tileToFind.Delete();
                 }
             }
 

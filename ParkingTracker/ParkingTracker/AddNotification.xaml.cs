@@ -27,9 +27,8 @@ namespace ParkingTracker
             time = date.Date + time.TimeOfDay;
 
             DateTime expirationTime = time;
-            //TODO : Replace the begin time with ExpirationTime-15
+
             DateTime beginTime = expirationTime.Subtract(new TimeSpan(0, 15, 0));
-            //DateTime beginTime = expirationTime;
 
             if (DateTime.Now > beginTime)
             {
@@ -39,14 +38,16 @@ namespace ParkingTracker
             
             var navigationUri = new Uri("/MainPage.xaml",UriKind.Relative);
             
-            var reminder = new Reminder(name);
-            reminder.Title = "Parking Meter";
-            reminder.Content = "Your parking meter time is expiring in 15 minutes";
-            reminder.BeginTime = beginTime;
-            reminder.ExpirationTime = expirationTime;
-            reminder.RecurrenceType = RecurrenceInterval.None;
-            reminder.NavigationUri = navigationUri;
-            
+            var reminder = new Reminder(name)
+                               {
+                                   Title = "Parking Meter",
+                                   Content = "Your parking meter time is expiring in 15 minutes",
+                                   BeginTime = beginTime,
+                                   ExpirationTime = expirationTime,
+                                   RecurrenceType = RecurrenceInterval.None,
+                                   NavigationUri = navigationUri
+                               };
+
             // Register the reminder with the system.
             ScheduledActionService.Add(reminder);
 
@@ -63,7 +64,7 @@ namespace ParkingTracker
 
         private void ExpirationDatePickerValueChanged(object sender, Microsoft.Phone.Controls.DateTimeValueChangedEventArgs e)
         {
-            if(expirationDatePicker.Value.Value.Date > DateTime.Now.Date.AddDays(1))
+            if(expirationDatePicker.Value != null && expirationDatePicker.Value.Value.Date > DateTime.Now.Date.AddDays(1))
             {
                 expirationDatePicker.Value = DateTime.Now.Date;
                 MessageBox.Show("The parking meter expiry date cannot be after tomorrow.");

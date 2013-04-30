@@ -16,4 +16,3 @@ D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\obj\Release\Parkin
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\obj\Release\ParkingTracker.dll
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\obj\Release\ParkingTracker.pdb
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\obj\Release\XapCacheFile.xml
-D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\obj\Release\ParkingTracker.csprojResolveAssemblyReference.cache

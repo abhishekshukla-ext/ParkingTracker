@@ -22,7 +22,7 @@
             <TextBlock FontSize="32" Margin="0,20,0,0"
                            Name="expirationTimeLabel" Foreground="#FF07165B"
                            Text="Select parking expiry time" VerticalAlignment="Center"
-                           HorizontalAlignment="Center" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Matura MT Script Capitals" TextWrapping="Wrap" FontStyle="Italic" FontWeight="Bold"/>
+                           HorizontalAlignment="Center" TextWrapping="Wrap" FontStyle="Italic" FontWeight="Bold"/>
 
             <toolkit:DatePicker x:Name="expirationDatePicker" Margin="0,20,0,0" ValueChanged="ExpirationDatePickerValueChanged"
                                 HorizontalAlignment="Center" Foreground="#FF07165B" FontWeight="ExtraBold" Template="{StaticResource DatePickerControlTemplate}" Width="279" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Quartz MS"/>
