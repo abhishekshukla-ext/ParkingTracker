@@ -62,6 +62,23 @@
     				HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" FontSize="48" BorderThickness="0"/>
     		</StackPanel>
     	</ControlTemplate>
+    	<ControlTemplate x:Key="TimeSpanPickerCurrentTime" TargetType="c4fToolkit:TimeSpanPicker">
+    		<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+    			<ContentControl
+    				Content="{TemplateBinding Header}"
+    				ContentTemplate="{TemplateBinding HeaderTemplate}"
+    				Foreground="{StaticResource PhoneSubtleBrush}" 
+    				HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            />
+    			<Button  FontSize="32"  Background="Transparent"
+    				x:Name="ValueButton"
+    				Content="{TemplateBinding ValueString}"
+    				BorderThickness="0"
+    				FontFamily="{TemplateBinding FontFamily}"
+    				Foreground="#FF01570D"
+    				HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    		</StackPanel>
+    	</ControlTemplate>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

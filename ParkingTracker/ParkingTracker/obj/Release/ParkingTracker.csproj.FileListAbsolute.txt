@@ -9,10 +9,10 @@ D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\Bin\Release\Micros
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\obj\Release\App.g.cs
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\obj\Release\AddNotification.g.cs
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\obj\Release\MainPage.g.cs
-D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\obj\Release\ShowParams.g.cs
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\obj\Release\ParkingTracker.g.resources
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\obj\Release\ParkingTracker.Resources.AppResources.resources
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\obj\Release\ParkingTracker.csproj.GenerateResource.Cache
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\obj\Release\ParkingTracker.dll
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\obj\Release\ParkingTracker.pdb
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\obj\Release\XapCacheFile.xml
+D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\obj\Release\ParkingTracker.csprojResolveAssemblyReference.cache

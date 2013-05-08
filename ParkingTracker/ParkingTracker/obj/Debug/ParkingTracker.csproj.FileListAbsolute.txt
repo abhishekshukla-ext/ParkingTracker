@@ -17,8 +17,6 @@ D:\FL\FiverrGigs\Webd123\ParkingTracker\ParkingTracker\obj\Debug\ParkingTracker.
 D:\FL\FiverrGigs\Webd123\ParkingTracker\ParkingTracker\obj\Debug\ParkingTracker.pdb
 D:\FL\FiverrGigs\Webd123\ParkingTracker\ParkingTracker\obj\Debug\XapCacheFile.xml
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\Bin\Debug\Assets\ApplicationIcon.png
-D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\Bin\Debug\Assets\Tiles\IconicTileMediumLarge.png
-D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\Bin\Debug\Assets\Tiles\IconicTileSmall.png
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\Bin\Debug\ParkingTracker.dll
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\Bin\Debug\ParkingTracker.pdb
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\Bin\Debug\AppManifest.xaml
@@ -34,6 +32,5 @@ D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\obj\Debug\ParkingT
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\obj\Debug\XapCacheFile.xml
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\Bin\Debug\Microsoft.Phone.Controls.Toolkit.dll
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\obj\Debug\AddNotification.g.cs
-D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\obj\Debug\ShowParams.g.cs
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\obj\Debug\ParkingTracker.csprojResolveAssemblyReference.cache
 D:\FL\FiverrGigs\Webd123\Source\ParkingTracker\ParkingTracker\Bin\Debug\Coding4Fun.Phone.Controls.Toolkit.dll

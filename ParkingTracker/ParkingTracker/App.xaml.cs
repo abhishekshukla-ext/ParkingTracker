@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO.IsolatedStorage;
 using System.Resources;
 using System.Windows;
 using System.Windows.Markup;
@@ -7,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using ParkingTracker.Resources;
+using Microsoft.Phone.Marketplace;
 
 namespace ParkingTracker
 {
@@ -17,6 +19,41 @@ namespace ParkingTracker
         /// </summary>
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
+        private static readonly LicenseInformation LicenseInfo = new LicenseInformation();
+        IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
+        
+        private static bool _isTrial = true;
+        public bool IsTrial
+        {
+            get
+            {
+                return _isTrial;
+            }
+        }
+
+        public static int UsageCount
+        {
+            get { return _usageCount; }
+            set { _usageCount = value; }
+        }
+
+        private static int _usageCount = 0;
+
+        /// <summary>
+        /// Check the current license information for this application
+        /// </summary>
+        private void CheckLicense()
+        {
+            if (settings.Contains("UsageCount"))
+            {
+                UsageCount = (int)settings["UsageCount"];
+            }
+            else
+            {
+                settings.Add("UsageCount", 0);
+            }
+            _isTrial = _usageCount > 6;
+        }
 
         /// <summary>
         /// Constructor for the Application object.
@@ -61,24 +98,42 @@ namespace ParkingTracker
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            CheckLicense();
         }
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+            CheckLicense();
         }
 
         // Code to execute when the application is deactivated (sent to background)
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
+            if (settings.Contains("UsageCount"))
+            {
+                settings["UsageCount"] = UsageCount;
+            }
+            else
+            {
+                settings.Add("UsageCount", UsageCount);
+            }
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
+            if (settings.Contains("UsageCount"))
+            {
+                settings["UsageCount"] = UsageCount;
+            }
+            else
+            {
+                settings.Add("UsageCount", UsageCount);
+            }
         }
 
         // Code to execute if a navigation fails

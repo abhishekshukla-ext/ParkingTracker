@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using Microsoft.Phone.Scheduler;
 using Microsoft.Phone.Shell;
+using Microsoft.Phone.Tasks;
 
 namespace ParkingTracker
 {
@@ -14,12 +17,40 @@ namespace ParkingTracker
         IEnumerable<ScheduledNotification> _notifications;
         private DispatcherTimer _dispatcherTimer;
         private DateTime EndTime { get; set; }
+        MarketplaceDetailTask _marketPlaceDetailTask = new MarketplaceDetailTask();
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             EndTime = DateTime.MinValue;
             _dispatcherTimer = null;
             ResetItemsList();
+            base.OnNavigatedTo(e);
+
+            if ((Application.Current as App).IsTrial)
+            {
+                ActivateTrialSettings();
+            }
+            else
+            {
+                DeactivateTrialSettings();
+            }
+        }
+
+        private void ActivateTrialSettings()
+        {
+            btnBuyApplication.Visibility = Visibility.Visible;
+            TrialInfo.Visibility = Visibility.Visible;
+            EmptyTextBlock.Visibility = Visibility.Collapsed;
+        }
+
+        private void DeactivateTrialSettings()
+        {
+            btnBuyApplication.Visibility = Visibility.Collapsed;
+            TrialInfo.Visibility = Visibility.Collapsed;
+            if (_notifications.Count<ScheduledNotification>() <= 0)
+            {
+                EmptyTextBlock.Visibility = Visibility.Visible;
+            }
         }
 
         public MainPage()
@@ -29,6 +60,7 @@ namespace ParkingTracker
 
         private void ApplicationBarAddButtonClick(object sender, EventArgs e)
         {
+            if ((Application.Current as App).IsTrial) return;
             if (_notifications != null && _notifications.Count<ScheduledNotification>() > 0)
             {
                 MessageBox.Show("Parking time tracker already exists. Please delete this one to add a new one");
@@ -73,7 +105,10 @@ namespace ParkingTracker
                 _dispatcherTimer.Start();
                 
                 EmptyTextBlock.Visibility = Visibility.Collapsed;
-                timespanPanel.Visibility = Visibility.Visible;
+                if (!(Application.Current as App).IsTrial)
+                {
+                    timespanPanel.Visibility = Visibility.Visible;
+                }
             }
             else
             {
@@ -86,6 +121,7 @@ namespace ParkingTracker
             var remaining = EndTime - DateTime.Now;
             var remainingSeconds = (int)remaining.TotalSeconds;
             timeSpan.Value = TimeSpan.FromSeconds(remainingSeconds);
+            currentTimeSpan.Text = DateTime.Now.ToShortTimeString();
 
             if (remaining.TotalSeconds <= 0)
             {
@@ -103,21 +139,24 @@ namespace ParkingTracker
 
         private void ApplicationBarDeleteButtonClick(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure?", "Delete Item", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            if (!(Application.Current as App).IsTrial)
             {
                 if (_notifications.Count<ScheduledNotification>() > 0)
                 {
-                    ScheduledActionService.Remove(_notifications.First<ScheduledNotification>().Name);
-                    _notifications = null;
-                    EndTime = DateTime.MinValue;
-                    timeSpan.Value = new TimeSpan();
-                    timespanPanel.Visibility = Visibility.Collapsed;
-                    EmptyTextBlock.Visibility = Visibility.Visible;
-                    if (_dispatcherTimer != null)
+                    if (MessageBox.Show("Are you sure?", "Delete Item", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
                     {
-                        _dispatcherTimer.Stop();
+                        ScheduledActionService.Remove(_notifications.First<ScheduledNotification>().Name);
+                        _notifications = null;
+                        EndTime = DateTime.MinValue;
+                        timeSpan.Value = new TimeSpan();
+                        timespanPanel.Visibility = Visibility.Collapsed;
+                        EmptyTextBlock.Visibility = Visibility.Visible;
+                        if (_dispatcherTimer != null)
+                        {
+                            _dispatcherTimer.Stop();
+                        }
+                        SetIconicTile(false, null);
                     }
-                    SetIconicTile(false, null);
                 }
             }
         }
@@ -171,6 +210,11 @@ namespace ParkingTracker
                 }
             }
 
+        }
+
+        private void BtnBuyApplicationClick(object sender, RoutedEventArgs e)
+        {
+            _marketPlaceDetailTask.Show();
         }
     }
 }

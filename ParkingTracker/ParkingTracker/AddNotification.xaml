@@ -21,15 +21,21 @@
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
             <TextBlock FontSize="32" Margin="0,20,0,0"
                            Name="expirationTimeLabel" Foreground="#FF07165B"
-                           Text="Select parking expiry time" VerticalAlignment="Center"
+                           Text="Select parking expiry time and press the save button at 
+                            the bottom." VerticalAlignment="Center"
                            HorizontalAlignment="Center" TextWrapping="Wrap" FontStyle="Italic" FontWeight="Bold"/>
 
             <toolkit:DatePicker x:Name="expirationDatePicker" Margin="0,20,0,0" ValueChanged="ExpirationDatePickerValueChanged"
                                 HorizontalAlignment="Center" Foreground="#FF07165B" FontWeight="ExtraBold" Template="{StaticResource DatePickerControlTemplate}" Width="279" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Quartz MS"/>
-            
+
             <toolkit:TimePicker x:Name="expirationTimePicker" Margin="0,20,0,0"
-                                HorizontalAlignment="Center" Foreground="#FF07165B" FontWeight="ExtraBold" Template="{StaticResource TimePickerControlTemplate}" Width="236" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Quartz MS"/>
+                                HorizontalAlignment="Center" Foreground="#FF07165B" FontWeight="ExtraBold" Template="{StaticResource TimePickerControlTemplate}" Width="273" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Quartz MS"/>
         </StackPanel>
+        <TextBlock FontSize="12" Margin="10,646,10,-14"
+                   Name="copyright" 
+                   Foreground="#FF07165B"
+                   Text="© Users are fully responsible for the use of the app and will not hold the app developer and anyone associated liable for its usage. The app is sold as seen and its fit for purpose should be decided before the 7 time user activation trial period has expired with no refunds after ordering full version." VerticalAlignment="Center"
+                   HorizontalAlignment="Center" TextWrapping="Wrap" Width="460"/>
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">

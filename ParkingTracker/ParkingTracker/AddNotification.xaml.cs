@@ -50,7 +50,7 @@ namespace ParkingTracker
 
             // Register the reminder with the system.
             ScheduledActionService.Add(reminder);
-
+            App.UsageCount++;
             NavigationService.GoBack();
         }
 
