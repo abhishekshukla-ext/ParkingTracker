@@ -83,16 +83,12 @@
                 <TextBlock Text="" TextWrapping="Wrap" Margin="0,20,0,0"
                            x:Name="currentTimeSpan"
 					HorizontalAlignment="Center" Foreground="#FF07165B"  FontWeight="ExtraBold" FontSize="24"/>
-                <!--<c4fToolkit:TimeSpanPicker Template="{StaticResource TimeSpanPickerCurrentTime}"  x:Name="currentTimeSpan"
-					VerticalAlignment="Center" Margin="0,20,0,0"
-					Foreground="#FF07165B"
-					Value="0" HorizontalAlignment="Center" Grid.Row="1" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Quartz MS"/>-->
-            </StackPanel>
+                </StackPanel>
         </StackPanel>
         <StackPanel Margin="0,588,0,-588"  >
             <Button x:Name="btnBuyApplication" Content="Buy Parking Tracker"
         		Click="BtnBuyApplicationClick" Style="{StaticResource BuyButtumTemplate}" Canvas.ZIndex="10" />
-            <TextBlock FontSize="12" x:Name="AppRegistrationStatus" 
+            <TextBlock FontSize="18" x:Name="AppRegistrationStatus" 
         		Foreground="#FF07165B"
         		HorizontalAlignment="Center" TextWrapping="Wrap" />
             <TextBlock FontSize="12" x:Name="copyright" 
