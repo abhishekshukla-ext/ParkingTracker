@@ -38,9 +38,14 @@ namespace ParkingTracker
 
         private void ActivateTrialSettings()
         {
+            if ((Application.Current as App).IsTrialUsageOver)
+            {
+                EmptyTextBlock.Visibility = Visibility.Collapsed;
+                TrialInfo.Visibility = Visibility.Visible;
+            }
             btnBuyApplication.Visibility = Visibility.Visible;
-            TrialInfo.Visibility = Visibility.Visible;
-            EmptyTextBlock.Visibility = Visibility.Collapsed;
+            AppRegistrationStatus.Visibility = Visibility.Visible;
+            AppRegistrationStatus.Text = "You have used the App for " + App.UsageCount + " times";
         }
 
         private void DeactivateTrialSettings()
@@ -51,6 +56,7 @@ namespace ParkingTracker
             {
                 EmptyTextBlock.Visibility = Visibility.Visible;
             }
+            AppRegistrationStatus.Visibility = Visibility.Collapsed;
         }
 
         public MainPage()
@@ -60,7 +66,7 @@ namespace ParkingTracker
 
         private void ApplicationBarAddButtonClick(object sender, EventArgs e)
         {
-            if ((Application.Current as App).IsTrial) return;
+            if ((Application.Current as App).IsTrialUsageOver) return;
             if (_notifications != null && _notifications.Count<ScheduledNotification>() > 0)
             {
                 MessageBox.Show("Parking time tracker already exists. Please delete this one to add a new one");
@@ -105,7 +111,7 @@ namespace ParkingTracker
                 _dispatcherTimer.Start();
                 
                 EmptyTextBlock.Visibility = Visibility.Collapsed;
-                if (!(Application.Current as App).IsTrial)
+                if (!(Application.Current as App).IsTrialUsageOver)
                 {
                     timespanPanel.Visibility = Visibility.Visible;
                 }
@@ -139,9 +145,9 @@ namespace ParkingTracker
 
         private void ApplicationBarDeleteButtonClick(object sender, EventArgs e)
         {
-            if (!(Application.Current as App).IsTrial)
+            if (!(Application.Current as App).IsTrialUsageOver)
             {
-                if (_notifications.Count<ScheduledNotification>() > 0)
+                if (_notifications != null && _notifications.Count<ScheduledNotification>() > 0)
                 {
                     if (MessageBox.Show("Are you sure?", "Delete Item", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
                     {

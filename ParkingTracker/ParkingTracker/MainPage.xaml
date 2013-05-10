@@ -13,73 +13,72 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
-	<phone:PhoneApplicationPage.Resources>
-		<Style x:Key="BuyButtumTemplate" TargetType="Button">
-			<Setter Property="Background" Value="Transparent"/>
-			<Setter Property="BorderBrush" Value="{StaticResource PhoneForegroundBrush}"/>
-			<Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-			<Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}"/>
-			<Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiBold}"/>
-			<Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMedium}"/>
-			<Setter Property="Padding" Value="10,5,10,6"/>
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="Button">
-						<Grid Background="Transparent">
-							<VisualStateManager.VisualStateGroups>
-								<VisualStateGroup x:Name="CommonStates">
-									<VisualState x:Name="Normal"/>
-									<VisualState x:Name="MouseOver"/>
-									<VisualState x:Name="Pressed"/>
-									<VisualState x:Name="Disabled"/>
-								</VisualStateGroup>
-							</VisualStateManager.VisualStateGroups>
-							<Border x:Name="ButtonBackground" CornerRadius="0" Background="#FF07165B">
-								<ContentControl x:Name="ContentContainer" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Foreground="White"/>
-							</Border>
-						</Grid>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-	</phone:PhoneApplicationPage.Resources>
+    <phone:PhoneApplicationPage.Resources>
+        <Style x:Key="BuyButtumTemplate" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PhoneForegroundBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+            <Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}"/>
+            <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiBold}"/>
+            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMedium}"/>
+            <Setter Property="Padding" Value="10,5,10,6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="Transparent">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="Pressed"/>
+                                    <VisualState x:Name="Disabled"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="ButtonBackground" CornerRadius="0" Background="#FF07165B">
+                                <ContentControl x:Name="ContentContainer" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Foreground="White"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </phone:PhoneApplicationPage.Resources>
 
     <Grid>
-
-		<StackPanel x:Name="LayoutRoot">
-			<StackPanel.Background>
-				<ImageBrush ImageSource="/Assets/Background.png" />
-			</StackPanel.Background>
-			<TextBlock Text="Welcome to Parking Tracker. Please select the end time by tapping the + button at the bottom." 
+        <StackPanel x:Name="LayoutRoot">
+            <StackPanel.Background>
+                <ImageBrush ImageSource="/Assets/Background.png" />
+            </StackPanel.Background>
+            <TextBlock Text="&#x0a;Welcome To Parking Tracker. &#x0a;&#x0a;Please Start By Tapping The + Button At The Bottom Of The Screen" 
 				x:Name="EmptyTextBlock" Visibility="Collapsed"
-				Foreground="#FF07165B"  FontWeight="ExtraBold"
+				Foreground="#FF07165B"  FontWeight="Bold"
 				TextWrapping="Wrap" FontSize="36" />
-			<TextBlock Text="Welcome to parking tracker. Your trial period has expired. Please tap on the Buy Now button to upgrade to the full version." 
+            <TextBlock Text="&#x0a;Welcome To parking tracker. &#x0a;&#x0a;Your Trial Period Has Expired! &#x0a;&#x0a; Please Tap On The 'Buy Parking Tracker' Button Below To Upgrade To The Full Version." 
 				x:Name="TrialInfo" Visibility="Collapsed"
 				Foreground="#FF07165B"  FontWeight="ExtraBold"
 				TextWrapping="Wrap" FontSize="36" />
-			<StackPanel x:Name="timespanPanel" Visibility="Collapsed">
-				<TextBlock Text="Your parking time will expire in " FontSize="30"
+            <StackPanel x:Name="timespanPanel" Visibility="Collapsed">
+                <TextBlock Text="Your parking time will expire in " FontSize="30"
 					Margin="0,20,0,0"
 					HorizontalAlignment="Center" Foreground="#FF07165B"  FontWeight="ExtraBold" TextWrapping="Wrap"/>
 
-				<c4fToolkit:TimeSpanPicker Template="{StaticResource TimeSpanCustomStyle}"  x:Name="timeSpan"
+                <c4fToolkit:TimeSpanPicker Template="{StaticResource TimeSpanCustomStyle}"  x:Name="timeSpan"
 					VerticalAlignment="Center" Margin="0,20,0,0"
 					Foreground="#FF07165B"  FontWeight="ExtraBold"
 					Value="0" HorizontalAlignment="Center" Grid.Row="1" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Quartz MS"/>
 
-				<TextBlock Text="Your parking meter will expire at" TextWrapping="NoWrap" 
+                <TextBlock Text="Your parking meter will expire at" TextWrapping="NoWrap" 
 					Margin="0,20,0,0" HorizontalAlignment="Center"
 					Foreground="#FF07165B"  FontWeight="ExtraBold" FontSize="24"/>
-				<TextBlock x:Name="ExpirationTime" HorizontalAlignment="Center"
+                <TextBlock x:Name="ExpirationTime" HorizontalAlignment="Center"
 					FontSize="24"  Margin="0,10,0,0" Foreground="#FF07165B"  FontWeight="ExtraBold" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Quartz MS"/>
 
-				<TextBlock Text="You will reminded at" TextWrapping="Wrap" Margin="0,20,0,0"
+                <TextBlock Text="You will reminded at" TextWrapping="Wrap" Margin="0,20,0,0"
 					HorizontalAlignment="Center" Foreground="#FF07165B"  FontWeight="ExtraBold" FontSize="24"/>
-				<TextBlock x:Name="BeginTime" HorizontalAlignment="Center" 
+                <TextBlock x:Name="BeginTime" HorizontalAlignment="Center" 
 					FontSize="24" Margin="0,10,0,0" Foreground="#FF07165B"  FontWeight="ExtraBold" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Quartz MS"/>
 
-				<TextBlock Text="Current Time" TextWrapping="Wrap" Margin="0,20,0,0"
+                <TextBlock Text="Current Time" TextWrapping="Wrap" Margin="0,20,0,0"
 					HorizontalAlignment="Center" Foreground="#FF07165B"  FontWeight="ExtraBold" FontSize="24"/>
                 <TextBlock Text="" TextWrapping="Wrap" Margin="0,20,0,0"
                            x:Name="currentTimeSpan"
@@ -88,16 +87,20 @@
 					VerticalAlignment="Center" Margin="0,20,0,0"
 					Foreground="#FF07165B"
 					Value="0" HorizontalAlignment="Center" Grid.Row="1" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Quartz MS"/>-->
-			</StackPanel>
-		</StackPanel>
-		<Button x:Name="btnBuyApplication" Content="Buy Parking Tracker"
-			Click="BtnBuyApplicationClick" Style="{StaticResource BuyButtumTemplate}" Margin="0,591,0,63" Canvas.ZIndex="10" />
-		<TextBlock FontSize="12" Margin="0,632,0,0"
-			x:Name="copyright" 
-			Foreground="#FF07165B"
-			Text="© Users are fully responsible for the use of the app and will not hold the app developer and anyone associated liable for its usage. The app is sold as seen and its fit for purpose should be decided before the 7 time user activation trial period has expired with no refunds after ordering full version." VerticalAlignment="Center"
-			HorizontalAlignment="Center" TextWrapping="Wrap" Width="480"/>
-	</Grid>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Margin="0,588,0,-588"  >
+            <Button x:Name="btnBuyApplication" Content="Buy Parking Tracker"
+        		Click="BtnBuyApplicationClick" Style="{StaticResource BuyButtumTemplate}" Canvas.ZIndex="10" />
+            <TextBlock FontSize="12" x:Name="AppRegistrationStatus" 
+        		Foreground="#FF07165B"
+        		HorizontalAlignment="Center" TextWrapping="Wrap" />
+            <TextBlock FontSize="12" x:Name="copyright" 
+            	Foreground="#FF07165B"
+            	Text="© Users are fully responsible for the use of the app and will not hold the app developer and anyone associated liable for its usage. The app is sold as seen and its fit for purpose should be decided before the 7 time user activation trial period has expired with no refunds after ordering full version."
+            	HorizontalAlignment="Center" TextWrapping="Wrap" />
+        </StackPanel>
+    </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Add.png" 

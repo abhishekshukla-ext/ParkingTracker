@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO.IsolatedStorage;
-using System.Resources;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using ParkingTracker.Resources;
-using Microsoft.Phone.Marketplace;
+using Windows.ApplicationModel.Store;
 
 namespace ParkingTracker
 {
@@ -19,7 +18,7 @@ namespace ParkingTracker
         /// </summary>
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
-        private static readonly LicenseInformation LicenseInfo = new LicenseInformation();
+        private static LicenseInformation LicenseInfo;
         IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
         
         private static bool _isTrial = true;
@@ -29,6 +28,16 @@ namespace ParkingTracker
             {
                 return _isTrial;
             }
+        }
+
+        private static bool _isTrialUsageOver = true;
+        public bool IsTrialUsageOver
+        {
+            get
+            {
+                return _isTrialUsageOver;
+            }
+            set { _isTrialUsageOver = value; }
         }
 
         public static int UsageCount
@@ -52,7 +61,7 @@ namespace ParkingTracker
             {
                 settings.Add("UsageCount", 0);
             }
-            _isTrial = _usageCount > 6;
+            _isTrialUsageOver = _usageCount >= 7;
         }
 
         /// <summary>
@@ -91,7 +100,6 @@ namespace ParkingTracker
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
-
         }
 
         // Code to execute when the application is launching (eg, from Start)
@@ -180,6 +188,60 @@ namespace ParkingTracker
 
             // Ensure we don't initialize again
             phoneApplicationInitialized = true;
+
+            if (LicenseInfo == null || LicenseInfo.IsTrial)
+            {
+                _isTrial = true;
+            }
+
+            InitializeLicense();
+        }
+
+        void InitializeLicense()
+        {
+            LicenseInfo = CurrentApp.LicenseInformation;
+            LicenseInfo.LicenseChanged += LicenseInfoLicenseChanged;
+        }
+
+        void LicenseInfoLicenseChanged()
+        {
+            ReloadLicense();
+        }
+
+        void ReloadLicense()
+        {
+            if (LicenseInfo.IsActive)
+            {
+                if (LicenseInfo.IsTrial)
+                {
+                    if (settings.Contains("UsageCount"))
+                    {
+                        UsageCount = (int)settings["UsageCount"];
+                    }
+                    else
+                    {
+                        settings.Add("UsageCount", 0);
+                    }
+                    _isTrialUsageOver = _usageCount >= 7;
+                    _isTrial = true;
+                }
+                else
+                {
+                    if (settings.Contains("UsageCount"))
+                    {
+                        settings["UsageCount"] = 0;
+                    }
+                    else
+                    {
+                        settings.Add("UsageCount", 0);
+                    }
+                    _isTrial = false;
+                }
+            }
+            else
+            {
+                // A license is inactive only when there's an error.
+            }
         }
 
         // Do not add any additional code to this method
