@@ -20,10 +20,13 @@
         </Grid.Background>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
             <TextBlock FontSize="32" Margin="0,20,0,0"
-                           Name="expirationTimeLabel" Foreground="#FF07165B"
-                           Text="&#x0a;Please Select The Parking Expiry Time And Press The 'Save' Button Below" VerticalAlignment="Center"
-                           HorizontalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold" Width="472"/>
-
+                        Name="expirationTimeLabel1" Foreground="#FF07165B"
+                        Text="Setting The Expiry Time" VerticalAlignment="Center"
+                        HorizontalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold" Width="472"/>
+            <TextBlock FontSize="32" Margin="0,20,0,0"
+                        Name="expirationTimeLabel2" Foreground="#FF07165B"
+                        Text="1. Tap The Time &#x0a;    Below.&#x0a;2. Tap The Save &#x0a;    Button (disk symbol)" VerticalAlignment="Center"
+                        HorizontalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold" Width="472"/>
             <toolkit:DatePicker x:Name="expirationDatePicker" Margin="0,20,0,0" ValueChanged="ExpirationDatePickerValueChanged"
                                 HorizontalAlignment="Center" Foreground="#FF07165B" FontWeight="ExtraBold" Template="{StaticResource DatePickerControlTemplate}" Width="279" FontFamily="/ParkingTracker;component/Fonts/Fonts.zip#Quartz MS"/>
 

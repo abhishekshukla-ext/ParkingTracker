@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using Microsoft.Phone.Scheduler;
@@ -131,7 +129,7 @@ namespace ParkingTracker
 
             if (remaining.TotalSeconds <= 0)
             {
-                _dispatcherTimer.Stop();
+                if (_dispatcherTimer != null) _dispatcherTimer.Stop();
                 if (_notifications != null && _notifications.Count<ScheduledNotification>() > 0)
                 {
                     ScheduledActionService.Remove(_notifications.First<ScheduledNotification>().Name);

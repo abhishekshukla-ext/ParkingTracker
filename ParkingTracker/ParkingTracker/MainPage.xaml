@@ -49,11 +49,11 @@
             <StackPanel.Background>
                 <ImageBrush ImageSource="/Assets/Background.png" />
             </StackPanel.Background>
-            <TextBlock Text="&#x0a;Welcome To Parking Tracker. &#x0a;&#x0a;Please Start By Tapping The + Button At The Bottom Of The Screen" 
+            <TextBlock Text="&#x0a;Welcome To &#x0a;Parking Tracker. &#x0a;&#x0a;Please Start By Tapping The + Button At The Bottom Of The Screen" 
 				x:Name="EmptyTextBlock" Visibility="Collapsed"
 				Foreground="#FF07165B"  FontWeight="Bold"
 				TextWrapping="Wrap" FontSize="36" />
-            <TextBlock Text="&#x0a;Welcome To parking tracker. &#x0a;&#x0a;Your Trial Period Has Expired! &#x0a;&#x0a; Please Tap On The 'Buy Parking Tracker' Button Below To Upgrade To The Full Version." 
+            <TextBlock Text="&#x0a;Welcome To parking tracker. &#x0a;&#x0a;Your Trial Period Has Expired! &#x0a;&#x0a;Please Tap On The 'Buy Parking Tracker' Button Below To Upgrade To The Full Version." 
 				x:Name="TrialInfo" Visibility="Collapsed"
 				Foreground="#FF07165B"  FontWeight="ExtraBold"
 				TextWrapping="Wrap" FontSize="36" />

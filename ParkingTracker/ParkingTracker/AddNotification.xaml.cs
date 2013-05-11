@@ -9,6 +9,7 @@ namespace ParkingTracker
         public AddNotification()
         {
             InitializeComponent();
+            expirationTimeLabel1.TextDecorations = TextDecorations.Underline;
         }
 
         private void ApplicationBarSaveButtonClick(object sender, EventArgs e)
