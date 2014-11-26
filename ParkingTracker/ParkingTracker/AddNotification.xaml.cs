@@ -72,7 +72,7 @@ namespace ParkingTracker
             if(expirationDatePicker.Value != null && expirationDatePicker.Value.Value.Date > DateTime.Now.Date.AddDays(1))
             {
                 expirationDatePicker.Value = DateTime.Now.Date;
-                MessageBox.Show("The parking meter expiry date cannot be after tomorrow.");
+                MessageBox.Show("The parking meter expiry cannot be more than a day.");
             }
         }
     }
